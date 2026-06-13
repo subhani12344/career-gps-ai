@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: career-gps-db
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - career-gps-network
+
+  backend:
+    build:
+      context: ../server
+      dockerfile: Dockerfile
+    container_name: career-gps-api
+    ports:
+      - "5000:5000"
+    environment:
+      - PORT=5000
+      - MONGODB_URI=mongodb://mongodb:27017/careergps
+      - JWT_SECRET=career_gps_super_secret_jwt_key_12345
+      - NODE_ENV=production
+    depends_on:
+      - mongodb
+    networks:
+      - career-gps-network
+
+  frontend:
+    build:
+      context: ../client
+      dockerfile: Dockerfile
+    container_name: career-gps-client
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - career-gps-network
+
+networks:
+  career-gps-network:
+    driver: bridge
+
+volumes:
+  mongo-data:
+    driver: local

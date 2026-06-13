@@ -1,0 +1,1808 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Career GPS AI — Navigate Your Tech Journey</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            darkBg: '#0b0c10',
+            darkCard: 'rgba(21, 23, 30, 0.75)',
+            primaryPurple: '#8b5cf6',
+            primaryCyan: '#06b6d4',
+            accentPink: '#ec4899',
+            borderGlass: 'rgba(255, 255, 255, 0.08)',
+          },
+          fontFamily: {
+            sans: ['Outfit', 'Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background: radial-gradient(circle at 50% 0%, #17102b 0%, #0b0c10 70%);
+      background-attachment: fixed;
+    }
+    .glass-panel {
+      background: rgba(21, 23, 30, 0.65);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .text-gradient {
+      background: linear-gradient(135deg, #a78bfa 0%, #06b6d4 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .bg-gradient-primary {
+      background: linear-gradient(135deg, #8b5cf6 0%, #06b6d4 100%);
+    }
+    /* Timeline styling */
+    .roadmap-line::after {
+      content: '';
+      position: absolute;
+      top: 40px;
+      bottom: -40px;
+      left: 23px;
+      width: 2px;
+      background: linear-gradient(to bottom, #8b5cf6, #06b6d4, transparent);
+      z-index: 0;
+    }
+    .roadmap-line:last-child::after {
+      display: none;
+    }
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(11, 12, 16, 0.5);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(139, 92, 246, 0.2);
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body class="bg-darkBg text-gray-100 font-sans min-h-screen antialiased">
+
+  <!-- ========================================== -->
+  <!-- 1. LANDING PAGE VIEW -->
+  <!-- ========================================== -->
+  <div id="view-landing" class="relative min-h-screen flex flex-col justify-between overflow-hidden">
+    <!-- Neon blobs -->
+    <div class="absolute top-0 left-0 w-[40vw] h-[40vw] rounded-full bg-violet-600/10 blur-[120px] pointer-events-none"></div>
+    <div class="absolute bottom-0 right-0 w-[40vw] h-[40vw] rounded-full bg-cyan-500/10 blur-[120px] pointer-events-none"></div>
+
+    <header class="max-w-7xl mx-auto w-full px-6 py-6 flex items-center justify-between z-10">
+      <div class="flex items-center gap-3">
+        <div class="h-10 w-10 rounded-xl bg-gradient-primary flex items-center justify-center shadow-lg shadow-purple-500/20">
+          <i data-lucide="compass" class="h-6 w-6 text-white"></i>
+        </div>
+        <span class="font-extrabold text-xl tracking-tight text-white">Career GPS <span class="text-primaryCyan">AI</span></span>
+      </div>
+      <div class="flex items-center gap-4">
+        <button onclick="switchView('login')" class="px-4 py-2 text-sm text-gray-400 hover:text-white transition">Sign In</button>
+        <button onclick="switchView('register')" class="px-5 py-2.5 text-sm font-semibold rounded-xl bg-gradient-primary text-white shadow-lg hover:scale-105 transition">Get Started</button>
+      </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto w-full px-6 py-12 flex-1 flex flex-col lg:flex-row items-center justify-center gap-12 z-10">
+      <div class="flex-1 space-y-6 text-center lg:text-left">
+        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass-panel text-xs text-primaryCyan border border-cyan-500/30">
+          <i data-lucide="shield-check" class="h-3.5 w-3.5"></i> Next-Gen AI Career Steering Platform
+        </div>
+        <h1 class="text-4xl md:text-6xl font-extrabold leading-tight text-white">
+          Navigate Your Tech Journey with <span class="text-gradient">GPS AI</span>
+        </h1>
+        <p class="text-gray-400 text-lg max-w-xl mx-auto lg:mx-0">
+          Stop guessing your learning path. Create AI-powered personalized roadmaps, evaluate resumes, grade technical interviews, and track applications.
+        </p>
+        
+        <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4">
+          <button onclick="switchView('register')" class="px-8 py-4 font-bold rounded-2xl bg-gradient-primary text-white shadow-xl hover:scale-105 transition">
+            Start Your GPS Guide
+          </button>
+        </div>
+      </div>
+
+      <div class="flex-1 w-full max-w-md lg:max-w-none flex justify-center">
+        <!-- Interactive Widget Mock -->
+        <div class="w-full max-w-[440px] rounded-3xl p-6 glass-panel shadow-2xl relative border-white/10 hover:border-purple-500/30 transition duration-300">
+          <div class="flex items-center justify-between pb-6 border-b border-white/5">
+            <div class="flex items-center gap-3">
+              <div class="h-10 w-10 rounded-full bg-purple-500/10 flex items-center justify-center">
+                <i data-lucide="award" class="text-purple-400 h-5 w-5"></i>
+              </div>
+              <div>
+                <div class="font-bold text-white text-sm">GPS Assistant</div>
+                <div class="text-xs text-primaryCyan font-semibold">Generating Path...</div>
+              </div>
+            </div>
+            <span class="text-xs text-gray-500 font-medium">Lvl 1</span>
+          </div>
+
+          <div class="py-6 space-y-4">
+            <div class="space-y-1">
+              <div class="text-xs text-gray-500 font-bold uppercase">Target Career Goal</div>
+              <div class="text-md font-extrabold text-white">AI Engineer / Full-Stack</div>
+            </div>
+            
+            <div class="space-y-1.5">
+              <div class="flex justify-between text-xs font-semibold text-gray-400">
+                <span>ATS Match Rate</span>
+                <span class="text-cyan-400">82%</span>
+              </div>
+              <div class="w-full bg-white/5 h-2.5 rounded-full overflow-hidden">
+                <div class="h-full bg-gradient-primary rounded-full" style="width: 82%"></div>
+              </div>
+            </div>
+
+            <div class="rounded-xl bg-white/5 p-4 border border-white/5 space-y-2 text-xs">
+              <div class="text-purple-400 font-bold flex items-center gap-1">
+                <i data-lucide="info" class="h-3.5 w-3.5"></i> Suggested Next Step:
+              </div>
+              <p class="text-gray-400 leading-relaxed">
+                "Master PyTorch neural network builds in Month 3 to fill a crucial engineering knowledge gap."
+              </p>
+            </div>
+          </div>
+
+          <button onclick="switchView('register')" class="w-full py-3 rounded-xl bg-purple-500/10 hover:bg-purple-500/20 text-purple-300 text-xs font-bold transition flex items-center justify-center gap-2">
+            Access Dashboard <i data-lucide="chevron-right" class="h-4 w-4"></i>
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <footer class="py-6 border-t border-white/5 text-center text-xs text-gray-600 z-10">
+      © 2026 Career GPS AI Platform. Interactive browser client.
+    </footer>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 2. AUTHENTICATION VIEWS -->
+  <!-- ========================================== -->
+  <div id="view-auth" class="hidden min-h-screen flex items-center justify-center px-6 py-12 relative overflow-hidden">
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-600/10 blur-[150px] pointer-events-none rounded-full"></div>
+    
+    <div class="w-full max-w-md rounded-3xl p-8 glass-panel shadow-2xl relative border-white/10 space-y-6">
+      <button onclick="switchView('landing')" class="absolute top-6 left-6 text-gray-400 hover:text-white flex items-center gap-1 text-xs">
+        <i data-lucide="chevron-left" class="h-4 w-4"></i> Home
+      </button>
+
+      <div class="text-center space-y-2 pt-4">
+        <h2 id="auth-title" class="text-3xl font-extrabold text-white">Create Account</h2>
+        <p id="auth-subtitle" class="text-xs text-gray-400">Start tracking goals, gaps, and mock interview grades</p>
+      </div>
+
+      <div id="auth-error" class="hidden p-3 bg-red-500/10 border border-red-500/20 rounded-xl text-xs text-red-400 flex items-center gap-2">
+        <i data-lucide="info" class="h-4 w-4 shrink-0"></i> <span id="auth-error-text">Error message</span>
+      </div>
+
+      <form id="auth-form" onsubmit="handleAuthSubmit(event)" class="space-y-4">
+        <div id="field-name" class="space-y-1">
+          <label class="text-xs text-gray-400 font-semibold">NAME</label>
+          <input type="text" id="input-name" placeholder="Alex Mercer" class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:border-purple-500 focus:outline-none text-sm text-white">
+        </div>
+
+        <div class="space-y-1">
+          <label class="text-xs text-gray-400 font-semibold">EMAIL ADDRESS</label>
+          <input type="email" id="input-email" required placeholder="alex@gmail.com" class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:border-purple-500 focus:outline-none text-sm text-white">
+        </div>
+
+        <div class="space-y-1">
+          <label class="text-xs text-gray-400 font-semibold">PASSWORD</label>
+          <input type="password" id="input-password" required placeholder="••••••••" class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:border-purple-500 focus:outline-none text-sm text-white">
+        </div>
+
+        <button type="submit" class="w-full py-3 bg-gradient-primary text-white font-bold rounded-xl shadow-lg hover:opacity-90 transition mt-2 flex items-center justify-center gap-2">
+          <span id="auth-btn-text">Register Account</span>
+        </button>
+      </form>
+
+      <div class="relative flex py-2 items-center">
+        <div class="flex-grow border-t border-white/5"></div>
+        <span class="flex-shrink mx-4 text-gray-500 text-xs font-semibold">OR CONTINUOUS FLOW</span>
+        <div class="flex-grow border-t border-white/5"></div>
+      </div>
+
+      <button onclick="handleGoogleLogin()" class="w-full py-3 bg-white/5 hover:bg-white/10 border border-white/10 text-white font-semibold rounded-xl text-sm transition flex items-center justify-center gap-2">
+        <i data-lucide="globe" class="h-4 w-4 text-cyan-400"></i> Sign In with Google (Instant Sync)
+      </button>
+
+      <div class="text-center pt-2">
+        <button id="auth-toggle-link" onclick="toggleAuthMode()" class="text-xs text-purple-400 hover:text-purple-300 font-semibold underline">
+          Already have an account? Sign In
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 3. CORE PLATFORM LAYOUT VIEWS -->
+  <!-- ========================================== -->
+  <div id="view-platform" class="hidden min-h-screen flex bg-darkBg overflow-hidden">
+    
+    <!-- SIDEBAR -->
+    <aside class="glass-panel border-r border-white/5 w-64 shrink-0 flex flex-col justify-between">
+      <div>
+        <div class="h-16 border-b border-white/5 flex items-center px-6 gap-3">
+          <i data-lucide="compass" class="h-7 w-7 text-primaryCyan shrink-0"></i>
+          <span class="font-extrabold text-white text-md tracking-tight">GPS Console</span>
+        </div>
+
+        <!-- User profile badge -->
+        <div class="p-6 border-b border-white/5 space-y-4">
+          <div class="flex items-center gap-3">
+            <div id="sidebar-avatar" class="h-10 w-10 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-300 font-bold">
+              AM
+            </div>
+            <div>
+              <div id="sidebar-username" class="font-bold text-white text-sm truncate">Alex Mercer</div>
+              <div id="sidebar-goal" class="text-xs text-cyan-400 font-semibold truncate">AI Engineer</div>
+            </div>
+          </div>
+          <div class="space-y-1">
+            <div class="flex justify-between text-xs text-gray-500 font-bold">
+              <span id="label-level">Lvl 1</span>
+              <span id="label-xp">250 / 1000 XP</span>
+            </div>
+            <div class="w-full bg-white/5 h-1.5 rounded-full overflow-hidden">
+              <div id="bar-xp" class="h-full bg-gradient-primary rounded-full" style="width: 25%"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Nav items -->
+        <nav class="p-4 space-y-1">
+          <button onclick="setTab('dashboard')" id="nav-dashboard" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition bg-gradient-primary text-white">
+            <i data-lucide="layers" class="h-5 w-5"></i> Dashboard
+          </button>
+          <button onclick="setTab('roadmap')" id="nav-roadmap" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition text-gray-400 hover:bg-white/5 hover:text-white">
+            <i data-lucide="compass" class="h-5 w-5"></i> Career Roadmap
+          </button>
+          <button onclick="setTab('skills')" id="nav-skills" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition text-gray-400 hover:bg-white/5 hover:text-white">
+            <i data-lucide="bar-chart-2" class="h-5 w-5"></i> Skill Intelligence
+          </button>
+          <button onclick="setTab('resume')" id="nav-resume" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition text-gray-400 hover:bg-white/5 hover:text-white">
+            <i data-lucide="file-text" class="h-5 w-5"></i> Resume Analyzer
+          </button>
+          <button onclick="setTab('jobs')" id="nav-jobs" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition text-gray-400 hover:bg-white/5 hover:text-white">
+            <i data-lucide="briefcase" class="h-5 w-5"></i> Jobs Board
+          </button>
+          <button onclick="setTab('crm')" id="nav-crm" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition text-gray-400 hover:bg-white/5 hover:text-white">
+            <i data-lucide="trello" class="h-5 w-5"></i> Kanban CRM
+          </button>
+          <button onclick="setTab('interview')" id="nav-interview" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition text-gray-400 hover:bg-white/5 hover:text-white">
+            <i data-lucide="mic" class="h-5 w-5"></i> Interview Coach
+          </button>
+          <button onclick="setTab('chat')" id="nav-chat" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition text-gray-400 hover:bg-white/5 hover:text-white">
+            <i data-lucide="message-square" class="h-5 w-5"></i> AI Career Chat
+          </button>
+          <button onclick="setTab('profile')" id="nav-profile" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition text-gray-400 hover:bg-white/5 hover:text-white">
+            <i data-lucide="user" class="h-5 w-5"></i> Profile & CV
+          </button>
+          <button onclick="setTab('settings')" id="nav-settings" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition text-gray-400 hover:bg-white/5 hover:text-white">
+            <i data-lucide="settings" class="h-5 w-5"></i> Settings
+          </button>
+        </nav>
+      </div>
+
+      <div class="p-4 border-t border-white/5">
+        <button onclick="handleLogout()" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold text-red-400 hover:bg-red-500/10 transition">
+          <i data-lucide="log-out" class="h-5 w-5"></i> Logout
+        </button>
+      </div>
+    </aside>
+
+    <!-- CONTENT BODY -->
+    <div class="flex-1 flex flex-col h-screen overflow-y-auto">
+      
+      <!-- TOP NAVIGATION HEADER -->
+      <header class="h-16 border-b border-white/5 flex items-center justify-between px-8 bg-darkBg/30 backdrop-blur-md sticky top-0 z-20">
+        <div>
+          <span class="text-xs bg-cyan-500/10 text-cyan-400 font-bold px-2.5 py-1 rounded border border-cyan-500/20">
+            ⚡ LOCAL BROWSER SANDBOX ACTIVE
+          </span>
+        </div>
+
+        <div class="flex items-center gap-4">
+          <!-- Notification Dropdown Toggle -->
+          <div class="relative">
+            <button onclick="toggleNotifDropdown()" class="p-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-gray-300 relative">
+              <i data-lucide="bell" class="h-5 w-5"></i>
+              <span id="notif-badge" class="absolute top-1.5 right-1.5 h-2 w-2 rounded-full bg-cyan-400"></span>
+            </button>
+            <div id="notif-dropdown" class="hidden absolute right-0 mt-3 w-80 rounded-2xl p-4 glass-panel shadow-2xl border-white/10 space-y-3 z-50">
+              <div class="flex justify-between items-center pb-2 border-b border-white/5">
+                <span class="font-bold text-sm text-white">Notifications</span>
+                <button onclick="clearNotifications()" class="text-xs text-cyan-400 hover:underline">Mark all read</button>
+              </div>
+              <div id="notif-list" class="max-h-60 overflow-y-auto space-y-2">
+                <!-- Notifications preseeded -->
+              </div>
+            </div>
+          </div>
+          <div class="h-8 border-l border-white/10"></div>
+          <div class="text-right">
+            <div class="text-xs text-gray-500">SIGNED IN AS</div>
+            <div id="header-username" class="text-sm font-bold text-white">Alex Mercer</div>
+          </div>
+        </div>
+      </header>
+
+      <!-- PAGE MAIN CONTENT -->
+      <main class="p-8 flex-1 max-w-7xl w-full mx-auto space-y-8">
+
+        <!-- ========================================== -->
+        <!-- SCREEN 1: DASHBOARD HUB -->
+        <!-- ========================================== -->
+        <div id="tab-dashboard" class="tab-screen space-y-8">
+          <div class="rounded-3xl p-8 glass-panel relative overflow-hidden border-purple-500/20 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+            <div class="space-y-2">
+              <h2 class="text-3xl font-extrabold text-white">Console Dashboard</h2>
+              <p class="text-gray-400 text-sm">Target track is configured to <span id="dash-goal-span" class="text-cyan-400 font-extrabold">AI Engineer</span>.</p>
+            </div>
+            <button onclick="setTab('roadmap')" class="px-6 py-3 bg-gradient-primary text-white font-bold rounded-2xl shadow-lg hover:opacity-90 flex items-center gap-2">
+              <i data-lucide="compass" class="h-5 w-5"></i> View Active Roadmap
+            </button>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Level stats -->
+            <div class="rounded-2xl p-6 glass-panel space-y-4">
+              <div class="flex justify-between items-center">
+                <span class="text-xs text-gray-500 font-bold">XP PROGRESS</span>
+                <i data-lucide="award" class="text-purple-400"></i>
+              </div>
+              <div class="space-y-2">
+                <div id="dash-level" class="text-3xl font-extrabold text-white">Level 1</div>
+                <div class="flex justify-between text-xs text-gray-400">
+                  <span id="dash-xp-curr">250 XP</span>
+                  <span id="dash-xp-total">1000 XP needed</span>
+                </div>
+                <div class="w-full bg-white/5 h-2 rounded-full overflow-hidden">
+                  <div id="dash-xp-bar" class="h-full bg-gradient-primary rounded-full" style="width: 25%"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Steps Completed -->
+            <div class="rounded-2xl p-6 glass-panel space-y-4">
+              <div class="flex justify-between items-center">
+                <span class="text-xs text-gray-500 font-bold">ROADMAP STEPS</span>
+                <i data-lucide="compass" class="text-cyan-400"></i>
+              </div>
+              <div class="space-y-2">
+                <div id="dash-roadmap-steps" class="text-3xl font-extrabold text-white">0 / 6</div>
+                <p class="text-xs text-gray-400">Milestones completed. Keep learning!</p>
+              </div>
+            </div>
+
+            <!-- Kanban crm apps -->
+            <div class="rounded-2xl p-6 glass-panel space-y-4">
+              <div class="flex justify-between items-center">
+                <span class="text-xs text-gray-500 font-bold">JOB APPLICATIONS</span>
+                <i data-lucide="trello" class="text-pink-400"></i>
+              </div>
+              <div class="space-y-2">
+                <div id="dash-crm-count" class="text-3xl font-extrabold text-white">0 Active</div>
+                <p class="text-xs text-gray-400">Tracked in Kanban CRM board</p>
+              </div>
+            </div>
+
+            <!-- ATS Score -->
+            <div class="rounded-2xl p-6 glass-panel space-y-4">
+              <div class="flex justify-between items-center">
+                <span class="text-xs text-gray-500 font-bold">LATEST ATS SCORE</span>
+                <i data-lucide="file-text" class="text-yellow-400"></i>
+              </div>
+              <div class="space-y-2">
+                <div id="dash-ats-score" class="text-3xl font-extrabold text-white">N/A</div>
+                <p class="text-xs text-gray-400">CV compatibility rate</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- Checklist -->
+            <div class="lg:col-span-2 rounded-2xl p-6 glass-panel space-y-4">
+              <h3 class="font-bold text-lg text-white">Daily Learning Tasks</h3>
+              <div id="checklist-tasks" class="space-y-3">
+                <!-- Checklists will render here -->
+              </div>
+            </div>
+
+            <!-- AI Advisor card and achievements -->
+            <div class="space-y-6">
+              <div class="rounded-2xl p-6 glass-panel space-y-3 border-l-4 border-l-cyan-400">
+                <div class="text-xs text-cyan-400 font-bold flex items-center gap-1.5">
+                  <i data-lucide="compass" class="h-4 w-4"></i> AI GPS ADVISOR
+                </div>
+                <p id="dash-advisor-tip" class="text-sm text-gray-300 leading-relaxed">
+                  "Based on your track target of AI Engineer, you lack containerization knowledge. Practice writing Dockerfiles to pass initial ATS resume screenings."
+                </p>
+              </div>
+
+              <!-- Badges list -->
+              <div class="rounded-2xl p-6 glass-panel space-y-4">
+                <h3 class="font-bold text-sm text-white uppercase tracking-wider">Achievements</h3>
+                <div id="dashboard-achievements" class="grid grid-cols-4 gap-3">
+                  <!-- Badges render -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- SCREEN 2: CAREER ROADMAP -->
+        <!-- ========================================== -->
+        <div id="tab-roadmap" class="tab-screen hidden space-y-6">
+          <div class="rounded-3xl p-8 glass-panel relative overflow-hidden flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+            <div class="space-y-2">
+              <h2 class="text-3xl font-extrabold text-white">AI Career Roadmap</h2>
+              <p class="text-gray-400 text-sm">Targeting: <span id="roadmap-goal-span" class="font-bold text-white">AI Engineer</span></p>
+            </div>
+            <button onclick="regenerateRoadmap()" class="px-6 py-3 bg-gradient-primary text-white font-bold rounded-2xl hover:opacity-90 flex items-center gap-2">
+              <i data-lucide="compass" class="h-5 w-5 animate-spin-slow"></i> Regenerate AI Roadmap
+            </button>
+          </div>
+
+          <div id="roadmap-tree" class="space-y-8 relative pl-6">
+            <!-- Roadmap node timeline elements -->
+          </div>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- SCREEN 3: SKILL INTELLIGENCE -->
+        <!-- ========================================== -->
+        <div id="tab-skills" class="tab-screen hidden space-y-6">
+          <h2 class="text-3xl font-extrabold text-white">Skill Intelligence</h2>
+
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div class="rounded-2xl p-6 glass-panel space-y-4 lg:col-span-2">
+              <h3 class="font-bold text-lg text-white">My Skill Core</h3>
+              <div id="skills-list-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <!-- User skills -->
+              </div>
+            </div>
+
+            <div class="rounded-2xl p-6 glass-panel space-y-4 border-l-4 border-l-purple-500">
+              <h3 class="font-bold text-lg text-white">AI Gap Analyzer</h3>
+              <div class="space-y-4 text-sm">
+                <div class="space-y-1">
+                  <span class="text-xs text-gray-500 font-bold uppercase">Target Core Gaps</span>
+                  <div id="skills-gap-badges" class="flex flex-wrap gap-2 pt-1">
+                    <!-- Missing tags -->
+                  </div>
+                </div>
+
+                <div class="rounded-xl bg-white/5 p-4 border border-white/5 space-y-2 text-xs">
+                  <div class="font-bold text-purple-400 flex items-center gap-1">
+                    <i data-lucide="compass" class="h-3.5 w-3.5"></i> Core Roadmap Suggestion:
+                  </div>
+                  <p id="skills-advisor-paragraph" class="text-gray-400 leading-relaxed">
+                    "Masters of PyTorch are highly sought after. Dedicate 2 weeks in your roadmap to complete basic convolutional structures and model checkpoint logic."
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- SCREEN 4: RESUME ANALYZER -->
+        <!-- ========================================== -->
+        <div id="tab-resume" class="tab-screen hidden space-y-6">
+          <h2 class="text-3xl font-extrabold text-white">AI Resume Analyzer</h2>
+
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div class="rounded-2xl p-6 glass-panel space-y-4 lg:col-span-2">
+              <h3 class="font-bold text-lg text-white">Paste Resume / CV Markdown</h3>
+              <form onsubmit="handleAnalyzeResume(event)" class="space-y-4">
+                <textarea id="resume-textarea" rows="10" required placeholder="Paste the text of your resume here to compute ATS compatibility rates and find missing technical keywords..." class="w-full p-4 bg-white/5 border border-white/10 rounded-2xl focus:border-purple-500 focus:outline-none text-sm text-white resize-y"></textarea>
+                <div class="flex items-center justify-between">
+                  <span class="text-xs text-gray-500">Accepts plain text, markdown, or copy-paste CV tokens.</span>
+                  <button type="submit" class="px-6 py-3 bg-gradient-primary text-white font-bold rounded-xl shadow-lg hover:opacity-90">
+                    Evaluate ATS Score
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <div class="rounded-2xl p-6 glass-panel space-y-6">
+              <h3 class="font-bold text-lg text-white">ATS Output</h3>
+              <div id="resume-empty-state" class="text-center py-12 space-y-3">
+                <i data-lucide="upload" class="h-12 w-12 text-gray-600 mx-auto"></i>
+                <p class="text-xs text-gray-500">Submit your resume text to calculate the ATS alignment score.</p>
+              </div>
+
+              <div id="resume-result-state" class="hidden space-y-6">
+                <!-- Score badge -->
+                <div class="flex flex-col items-center justify-center p-4 bg-white/5 rounded-2xl border border-white/5 text-center">
+                  <div class="h-28 w-28 rounded-full border-4 border-cyan-400 flex flex-col items-center justify-center shadow-lg shadow-cyan-400/10">
+                    <span id="resume-score-percent" class="text-3xl font-extrabold text-white">82%</span>
+                    <span class="text-[10px] text-cyan-400 font-bold uppercase tracking-wider">ATS Score</span>
+                  </div>
+                  <span id="resume-target-label" class="text-xs text-gray-400 mt-4 leading-relaxed">Compared to: AI Engineer</span>
+                </div>
+
+                <!-- Missing words -->
+                <div class="space-y-2">
+                  <span class="text-xs text-gray-500 font-bold uppercase">Missing Keywords</span>
+                  <div id="resume-missing-keywords" class="flex flex-wrap gap-2"></div>
+                </div>
+
+                <!-- Formatting tips -->
+                <div class="space-y-2">
+                  <span class="text-xs text-gray-500 font-bold uppercase">ATS Feedback Logs</span>
+                  <ul id="resume-feedback-list" class="space-y-2 text-xs text-gray-400 list-disc pl-4"></ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- SCREEN 5: JOBS BOARD -->
+        <!-- ========================================== -->
+        <div id="tab-jobs" class="tab-screen hidden space-y-6">
+          <div class="flex justify-between items-center">
+            <h2 class="text-3xl font-extrabold text-white">Jobs Board</h2>
+            <button onclick="setTab('crm')" class="px-5 py-2.5 bg-purple-500/10 hover:bg-purple-500/20 text-purple-300 font-bold rounded-xl border border-purple-500/20 text-xs transition flex items-center gap-2">
+              <i data-lucide="trello" class="h-4 w-4"></i> Open Kanban CRM Board
+            </button>
+          </div>
+
+          <p class="text-gray-400 text-sm">
+            Recommended jobs matching your targeted track <span id="jobs-goal-span" class="font-bold text-white">AI Engineer</span>:
+          </p>
+
+          <div id="jobs-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Job listing cards preseeded -->
+          </div>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- SCREEN 6: KANBAN CRM -->
+        <!-- ========================================== -->
+        <div id="tab-crm" class="tab-screen hidden space-y-6">
+          <div class="flex justify-between items-center">
+            <h2 class="text-3xl font-extrabold text-white">CRM Kanban Tracker</h2>
+            <button onclick="openCRMModal()" class="px-5 py-2.5 bg-gradient-primary text-white font-bold rounded-xl text-xs flex items-center gap-1.5 shadow-lg shadow-purple-500/20 hover:opacity-90">
+              <i data-lucide="plus" class="h-4 w-4"></i> Add Application
+            </button>
+          </div>
+
+          <!-- Add Application Modal Overlay -->
+          <div id="crm-modal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-6">
+            <div class="w-full max-w-md bg-darkBg rounded-3xl p-6 border border-white/10 space-y-4 relative">
+              <button onclick="closeCRMModal()" class="absolute top-6 right-6 text-gray-400 hover:text-white">
+                <i data-lucide="x" class="h-5 w-5"></i>
+              </button>
+              <h3 class="text-lg font-bold text-white">Add Job Card</h3>
+              
+              <form onsubmit="handleCRMSubmit(event)" class="space-y-4">
+                <div class="space-y-1">
+                  <label class="text-xs text-gray-400 font-bold">JOB TITLE</label>
+                  <input type="text" id="crm-input-title" required placeholder="Machine Learning Engineer" class="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:border-purple-500 text-sm text-white">
+                </div>
+
+                <div class="space-y-1">
+                  <label class="text-xs text-gray-400 font-bold">COMPANY</label>
+                  <input type="text" id="crm-input-company" required placeholder="Google" class="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:border-purple-500 text-sm text-white">
+                </div>
+
+                <div class="space-y-1">
+                  <label class="text-xs text-gray-400 font-bold">NOTES / DESCRIPTION</label>
+                  <textarea id="crm-input-notes" rows="3" placeholder="Key requirements: Python, PyTorch..." class="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:border-purple-500 text-sm text-white resize-none"></textarea>
+                </div>
+
+                <button type="submit" class="w-full py-2.5 bg-gradient-primary text-white font-bold rounded-xl text-sm transition">
+                  Save Application Card
+                </button>
+              </form>
+            </div>
+          </div>
+
+          <!-- Columns layout grid -->
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <!-- Applied Column -->
+            <div class="rounded-2xl p-4 glass-panel border-t-4 border-t-purple-500 space-y-4 min-h-[300px]">
+              <div class="flex justify-between items-center">
+                <h3 class="font-bold text-xs uppercase tracking-wider text-gray-400">Applied</h3>
+                <span id="col-applied-count" class="text-xs font-bold bg-white/5 text-gray-300 px-2 py-0.5 rounded">0</span>
+              </div>
+              <div id="col-applied" class="space-y-3"></div>
+            </div>
+
+            <!-- Interview Column -->
+            <div class="rounded-2xl p-4 glass-panel border-t-4 border-t-cyan-400 space-y-4 min-h-[300px]">
+              <div class="flex justify-between items-center">
+                <h3 class="font-bold text-xs uppercase tracking-wider text-gray-400">Interview</h3>
+                <span id="col-interview-count" class="text-xs font-bold bg-white/5 text-gray-300 px-2 py-0.5 rounded">0</span>
+              </div>
+              <div id="col-interview" class="space-y-3"></div>
+            </div>
+
+            <!-- Selected (Offer) Column -->
+            <div class="rounded-2xl p-4 glass-panel border-t-4 border-t-green-400 space-y-4 min-h-[300px]">
+              <div class="flex justify-between items-center">
+                <h3 class="font-bold text-xs uppercase tracking-wider text-gray-400">Selected</h3>
+                <span id="col-selected-count" class="text-xs font-bold bg-white/5 text-gray-300 px-2 py-0.5 rounded">0</span>
+              </div>
+              <div id="col-selected" class="space-y-3"></div>
+            </div>
+
+            <!-- Rejected Column -->
+            <div class="rounded-2xl p-4 glass-panel border-t-4 border-t-red-400 space-y-4 min-h-[300px]">
+              <div class="flex justify-between items-center">
+                <h3 class="font-bold text-xs uppercase tracking-wider text-gray-400">Rejected</h3>
+                <span id="col-rejected-count" class="text-xs font-bold bg-white/5 text-gray-300 px-2 py-0.5 rounded">0</span>
+              </div>
+              <div id="col-rejected" class="space-y-3"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- SCREEN 7: INTERVIEW COACH -->
+        <!-- ========================================== -->
+        <div id="tab-interview" class="tab-screen hidden space-y-6">
+          <h2 class="text-3xl font-extrabold text-white">AI Interview Coach</h2>
+
+          <!-- Start Interview Config Card -->
+          <div id="interview-start-state" class="rounded-2xl p-8 glass-panel space-y-6 max-w-lg mx-auto">
+            <h3 class="font-bold text-lg text-white">Start Interview Practice</h3>
+            <p class="text-xs text-gray-400 leading-relaxed">
+              Configure your targeted job role. The AI technical interviewer will load 5 targeted technical, HR, and coding questions to evaluate.
+            </p>
+            
+            <div class="space-y-2">
+              <label class="text-xs text-gray-400 font-bold">TARGET JOB ROLE</label>
+              <select id="interview-role-select" class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-sm focus:outline-none focus:border-purple-500 text-white">
+                <option value="AI Engineer">AI Engineer</option>
+                <option value="Machine Learning Engineer">Machine Learning Engineer</option>
+                <option value="Full Stack Developer">Full Stack Developer</option>
+                <option value="Frontend Developer">Frontend Developer</option>
+              </select>
+            </div>
+
+            <button onclick="startInterview()" class="w-full py-3 bg-gradient-primary text-white font-bold rounded-xl shadow-lg hover:opacity-90 flex items-center justify-center gap-1.5">
+              <i data-lucide="mic" class="h-4 w-4"></i> Start Interview Coach Session
+            </button>
+          </div>
+
+          <!-- Active Practice Console -->
+          <div id="interview-active-state" class="hidden grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div class="lg:col-span-2 rounded-2xl p-6 glass-panel space-y-4">
+              <div class="flex justify-between items-center pb-2 border-b border-white/5">
+                <span id="interview-title-label" class="text-xs text-gray-500 font-bold">MOCK INTERVIEW SESSION: AI Engineer</span>
+                <span id="interview-progress-label" class="text-xs text-cyan-400 font-extrabold">Question 1 of 5</span>
+              </div>
+
+              <!-- Question text and answer field -->
+              <div id="interview-question-zone" class="space-y-6 py-4">
+                <div class="space-y-2">
+                  <span id="interview-qtype-badge" class="text-[10px] bg-purple-500/10 text-purple-400 font-bold px-2.5 py-0.5 rounded border border-purple-500/20 uppercase tracking-wider">
+                    technical
+                  </span>
+                  <h3 id="interview-qtext" class="text-lg font-bold text-white leading-relaxed">
+                    Explain the main advantages of the self-attention mechanism compared to LSTMs.
+                  </h3>
+                </div>
+
+                <div class="space-y-2">
+                  <div class="flex justify-between items-center">
+                    <label class="text-xs text-gray-400 font-bold">YOUR DETAILED ANSWER</label>
+                    <span class="text-[10px] text-gray-500">Minimum 50 characters recommended for high rating.</span>
+                  </div>
+                  <textarea id="interview-answer-input" rows="6" placeholder="Type your technical justification or HR response here..." class="w-full p-4 bg-white/5 border border-white/10 rounded-2xl focus:border-purple-500 focus:outline-none text-sm text-white resize-none"></textarea>
+                </div>
+
+                <button onclick="submitAnswer()" class="w-full py-3 bg-gradient-primary text-white font-bold rounded-xl flex items-center justify-center gap-1.5">
+                  Submit Answer for AI Grading
+                </button>
+              </div>
+
+              <!-- Score Summary State -->
+              <div id="interview-done-zone" class="hidden text-center py-12 space-y-6">
+                <div class="h-24 w-24 bg-green-500/10 border border-green-500/30 rounded-full flex items-center justify-center mx-auto text-green-400">
+                  <i data-lucide="check-circle-2" class="h-12 w-12"></i>
+                </div>
+                <div class="space-y-2">
+                  <h3 class="text-2xl font-extrabold text-white">Interview Complete!</h3>
+                  <p class="text-sm text-gray-400">Your answers were parsed and graded by the Career GPS model.</p>
+                </div>
+
+                <div class="p-6 bg-white/5 rounded-2xl border border-white/5 inline-block min-w-[200px]">
+                  <div id="interview-final-score" class="text-4xl font-extrabold text-white">82%</div>
+                  <div class="text-xs text-cyan-400 font-bold uppercase tracking-wider mt-1">Overall Interview Score</div>
+                </div>
+
+                <button onclick="resetInterview()" class="px-6 py-3 bg-purple-500/10 hover:bg-purple-500/20 text-purple-300 border border-purple-500/20 font-bold rounded-xl text-sm transition mx-auto block">
+                  Start New Session
+                </button>
+              </div>
+            </div>
+
+            <!-- Feedbacks logs list -->
+            <div class="rounded-2xl p-6 glass-panel space-y-4">
+              <h3 class="font-bold text-lg text-white">API Evaluation logs</h3>
+              <div id="interview-logs-container" class="space-y-4 max-h-[400px] overflow-y-auto pr-2">
+                <!-- Evaluation items -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- SCREEN 8: AI CAREER CHAT -->
+        <!-- ========================================== -->
+        <div id="tab-chat" class="tab-screen hidden space-y-6">
+          <h2 class="text-3xl font-extrabold text-white">AI Career Chatbot</h2>
+
+          <div class="rounded-2xl p-6 glass-panel h-[60vh] flex flex-col justify-between border-white/5">
+            <!-- Messages history -->
+            <div id="chat-messages-container" class="flex-1 overflow-y-auto space-y-4 pr-2 pb-4">
+              <div class="flex justify-start">
+                <div class="max-w-xl p-4 rounded-2xl text-sm leading-relaxed bg-white/5 text-gray-300 rounded-tl-none border border-white/5">
+                  Hello! I am your AI Career Coach. Ask me anything about skills, roadmaps, resume optimizations, or interviews!
+                </div>
+              </div>
+            </div>
+
+            <!-- Predefined query chips -->
+            <div class="flex flex-wrap gap-2 pb-4 pt-2 border-t border-white/5">
+              <button onclick="sendQuickChat('What should I learn next?')" class="text-[11px] bg-white/5 hover:bg-white/10 text-cyan-400 border border-cyan-400/20 px-3 py-1.5 rounded-full transition">
+                What should I learn next?
+              </button>
+              <button onclick="sendQuickChat('How do I build an AI Engineer portfolio?')" class="text-[11px] bg-white/5 hover:bg-white/10 text-cyan-400 border border-cyan-400/20 px-3 py-1.5 rounded-full transition">
+                How do I build an AI Engineer portfolio?
+              </button>
+              <button onclick="sendQuickChat('What makes a resume ATS compliant?')" class="text-[11px] bg-white/5 hover:bg-white/10 text-cyan-400 border border-cyan-400/20 px-3 py-1.5 rounded-full transition">
+                What makes a resume ATS compliant?
+              </button>
+            </div>
+
+            <!-- Input area -->
+            <div class="flex gap-3">
+              <input type="text" id="chat-message-input" onkeydown="if(event.key === 'Enter') sendChatMessage()" placeholder="Ask anything (e.g. 'explain self attention', 'suggest a database course')..." class="flex-1 px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:border-purple-500 text-sm text-white">
+              <button onclick="sendChatMessage()" class="px-5 py-3 bg-gradient-primary text-white rounded-xl font-bold flex items-center justify-center hover:opacity-90">
+                <i data-lucide="send" class="h-4 w-4"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- SCREEN 9: PROFILE AND CV -->
+        <!-- ========================================== -->
+        <div id="tab-profile" class="tab-screen hidden space-y-6">
+          <h2 class="text-3xl font-extrabold text-white">Profile & CV Configurations</h2>
+
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div class="lg:col-span-2 rounded-2xl p-6 glass-panel space-y-6">
+              <form onsubmit="handleProfileSave(event)" class="space-y-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div class="space-y-1">
+                    <label class="text-xs text-gray-500 font-bold">CAREER TARGET GOAL</label>
+                    <input type="text" id="profile-input-goal" value="AI Engineer" class="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-sm focus:outline-none focus:border-purple-500 text-white">
+                  </div>
+                  <div class="space-y-1">
+                    <label class="text-xs text-gray-500 font-bold">LOCATION</label>
+                    <input type="text" id="profile-input-location" value="San Francisco, CA" class="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-sm focus:outline-none focus:border-purple-500 text-white">
+                  </div>
+                </div>
+
+                <div class="space-y-2">
+                  <label class="text-xs text-gray-500 font-bold">SKILLS (COMMA SEPARATED)</label>
+                  <input type="text" id="profile-input-skills" value="Python, JavaScript, HTML/CSS, Git" class="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-sm focus:outline-none focus:border-purple-500 text-white">
+                </div>
+
+                <div class="space-y-2">
+                  <label class="text-xs text-gray-500 font-bold">EDUCATION (SCHOOL)</label>
+                  <input type="text" id="profile-input-school" value="Stanford University" class="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-sm focus:outline-none focus:border-purple-500 text-white">
+                </div>
+
+                <div class="space-y-2">
+                  <label class="text-xs text-gray-500 font-bold">WORK EXPERIENCE (PREVIOUS ROLE)</label>
+                  <input type="text" id="profile-input-experience" value="Tech Corp" class="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-sm focus:outline-none focus:border-purple-500 text-white">
+                </div>
+
+                <button type="submit" class="px-6 py-2.5 bg-gradient-primary text-white font-bold rounded-xl text-xs hover:opacity-90">
+                  Save Profile Changes
+                </button>
+              </form>
+            </div>
+
+            <div class="rounded-2xl p-6 glass-panel space-y-4 border-l-4 border-l-cyan-400">
+              <h3 class="font-bold text-lg text-white">Target Summary</h3>
+              <p class="text-xs text-gray-400 leading-relaxed">
+                Completing all education, goals, location, and experience criteria unlocks the <span class="text-purple-400 font-bold">Profile Architect</span> badge (+250 XP).
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- SCREEN 10: SETTINGS -->
+        <!-- ========================================== -->
+        <div id="tab-settings" class="tab-screen hidden space-y-6">
+          <h2 class="text-3xl font-extrabold text-white">Settings</h2>
+
+          <div class="rounded-2xl p-6 glass-panel space-y-6 max-w-lg">
+            <div class="space-y-4">
+              <h3 class="font-bold text-lg text-white border-b border-white/5 pb-2">Interface Preferences</h3>
+
+              <div class="flex justify-between items-center">
+                <div>
+                  <span class="text-sm font-semibold text-white">Theme Configuration</span>
+                  <p class="text-xs text-gray-500">Toggle dark mode visuals</p>
+                </div>
+                <button onclick="toggleTheme()" class="p-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-gray-300">
+                  <i data-lucide="moon" id="theme-icon" class="h-5 w-5"></i>
+                </button>
+              </div>
+
+              <div class="flex justify-between items-center">
+                <div>
+                  <span class="text-sm font-semibold text-white">Email alerts notifications</span>
+                  <p class="text-xs text-gray-500">Receive weekly summaries from LLM advisor</p>
+                </div>
+                <input type="checkbox" checked class="h-4 w-4 rounded bg-white/5 border border-white/10 text-purple-600">
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </main>
+    </div>
+
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 4. CORE JAVASCRIPT STATE ENGINE -->
+  <!-- ========================================== -->
+  <script>
+    // State initialization
+    let state = {
+      user: null,
+      activeTab: 'dashboard',
+      profile: {
+        goal: 'AI Engineer',
+        skills: ['Python', 'JavaScript', 'HTML/CSS', 'Git'],
+        location: 'San Francisco, CA',
+        school: 'Stanford University',
+        company: 'Tech Corp',
+        xp: 250,
+        level: 1
+      },
+      roadmaps: [],
+      applications: [],
+      notifications: [
+        { id: 'n1', title: '👋 Welcome to Career GPS AI!', message: 'Explore your dashboard, set your goal, and analyze your CV.', read: false }
+      ],
+      achievements: [
+        { title: 'Compass Finder', description: 'Registered your account and initiated Career GPS.', badgeIcon: 'compass', locked: false },
+        { title: 'Profile Architect', description: 'Completed filling education, goals, and interests.', badgeIcon: 'user-check', locked: true },
+        { title: 'Resume Explorer', description: 'Analyzed your CV using ATS intelligence.', badgeIcon: 'file-text', locked: true },
+        { title: 'Speech Master', description: 'Completed a simulated mock interview.', badgeIcon: 'mic', locked: true }
+      ],
+      tasks: [
+        { id: 1, text: 'Generate an AI Roadmap for your target goal', completed: false, xp: 100 },
+        { id: 2, text: 'Perform your first ATS resume check', completed: false, xp: 150 },
+        { id: 3, text: 'Start a Mock Interview practice session', completed: false, xp: 200 },
+        { id: 4, text: 'Drag a Job application to the "Interview" stage', completed: false, xp: 100 }
+      ],
+      currentInterview: null,
+      currentQuestionIdx: 0,
+      darkMode: true
+    };
+
+    // Load local storage save states
+    function loadSaveState() {
+      const saved = localStorage.getItem('careergps_state');
+      if (saved) {
+        state = { ...state, ...JSON.parse(saved) };
+      }
+    }
+
+    function saveState() {
+      localStorage.setItem('careergps_state', JSON.stringify(state));
+    }
+
+    // View Routing
+    let currentAuthMode = 'register'; // or 'login'
+
+    function switchView(view) {
+      document.getElementById('view-landing').classList.add('hidden');
+      document.getElementById('view-auth').classList.add('hidden');
+      document.getElementById('view-platform').classList.add('hidden');
+
+      if (view === 'landing') {
+        document.getElementById('view-landing').classList.remove('hidden');
+      } else if (view === 'login' || view === 'register') {
+        currentAuthMode = view;
+        updateAuthFormUI();
+        document.getElementById('view-auth').classList.remove('hidden');
+      } else if (view === 'platform') {
+        document.getElementById('view-platform').classList.remove('hidden');
+        renderPlatform();
+      }
+      lucide.createIcons();
+    }
+
+    function toggleAuthMode() {
+      currentAuthMode = currentAuthMode === 'register' ? 'login' : 'register';
+      updateAuthFormUI();
+    }
+
+    function updateAuthFormUI() {
+      const title = document.getElementById('auth-title');
+      const subtitle = document.getElementById('auth-subtitle');
+      const nameField = document.getElementById('field-name');
+      const btnText = document.getElementById('auth-btn-text');
+      const toggleLink = document.getElementById('auth-toggle-link');
+      const errorDiv = document.getElementById('auth-error');
+
+      errorDiv.classList.add('hidden');
+
+      if (currentAuthMode === 'login') {
+        title.innerText = 'Welcome Back';
+        subtitle.innerText = 'Access your AI career guidance console';
+        nameField.classList.add('hidden');
+        btnText.innerText = 'Sign In';
+        toggleLink.innerText = "Don't have an account? Sign Up";
+      } else {
+        title.innerText = 'Create Account';
+        subtitle.innerText = 'Start tracking goals, gaps, and mock interview grades';
+        nameField.classList.remove('hidden');
+        btnText.innerText = 'Register Account';
+        toggleLink.innerText = 'Already have an account? Sign In';
+      }
+    }
+
+    function handleAuthSubmit(e) {
+      e.preventDefault();
+      const email = document.getElementById('input-email').value;
+      const name = document.getElementById('input-name').value || 'Alex Mercer';
+      
+      state.user = { name, email };
+      saveState();
+      
+      // Auto seed roadmaps if empty
+      if (state.roadmaps.length === 0) {
+        generateRoadmapData();
+      }
+      
+      switchView('platform');
+      addNotification('Welcome aboard!', 'You successfully initialized your Career GPS profile.', 'success');
+    }
+
+    function handleGoogleLogin() {
+      state.user = { name: 'Alex Mercer', email: 'alex.mercer@gmail.com' };
+      if (state.roadmaps.length === 0) {
+        generateRoadmapData();
+      }
+      saveState();
+      switchView('platform');
+      addNotification('Logged in with Google', 'Google account profile synced successfully.', 'success');
+    }
+
+    function handleLogout() {
+      state.user = null;
+      saveState();
+      switchView('landing');
+    }
+
+    // Platform render and Tab management
+    function setTab(tabId) {
+      state.activeTab = tabId;
+      
+      // Toggle hidden states on screen classes
+      document.querySelectorAll('.tab-screen').forEach(el => el.classList.add('hidden'));
+      document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+
+      // Toggle nav buttons focus
+      document.querySelectorAll('nav button').forEach(el => {
+        el.className = "w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition text-gray-400 hover:bg-white/5 hover:text-white";
+      });
+      document.getElementById(`nav-${tabId}`).className = "w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition bg-gradient-primary text-white shadow-md shadow-purple-500/10";
+
+      saveState();
+      renderPlatform();
+      lucide.createIcons();
+    }
+
+    // Award XP
+    function awardXP(amount, reason = '') {
+      state.profile.xp += amount;
+      const needed = state.profile.level * 1000;
+      if (state.profile.xp >= needed) {
+        state.profile.xp -= needed;
+        state.profile.level += 1;
+        addNotification('🎉 Level Up!', `Incredible job! You achieved Level ${state.profile.level}!`, 'achievement');
+      } else if (reason) {
+        addNotification('XP Earned!', `+${amount} XP: ${reason}`, 'success');
+      }
+      saveState();
+      renderProfileWidgets();
+    }
+
+    // In-app notifications helpers
+    function addNotification(title, message, type = 'info') {
+      state.notifications.unshift({
+        id: 'n_' + Math.random().toString(36).substr(2, 5),
+        title,
+        message,
+        read: false
+      });
+      saveState();
+      renderNotifications();
+    }
+
+    function clearNotifications() {
+      state.notifications.forEach(n => n.read = true);
+      saveState();
+      renderNotifications();
+    }
+
+    // General renderer
+    function renderPlatform() {
+      renderProfileWidgets();
+      renderNotifications();
+
+      if (state.activeTab === 'dashboard') {
+        renderDashboard();
+      } else if (state.activeTab === 'roadmap') {
+        renderRoadmap();
+      } else if (state.activeTab === 'skills') {
+        renderSkills();
+      } else if (state.activeTab === 'jobs') {
+        renderJobs();
+      } else if (state.activeTab === 'crm') {
+        renderCRM();
+      }
+    }
+
+    function renderProfileWidgets() {
+      document.getElementById('sidebar-username').innerText = state.user?.name || 'Alex Mercer';
+      document.getElementById('sidebar-goal').innerText = state.profile.goal;
+      document.getElementById('header-username').innerText = state.user?.name || 'Alex Mercer';
+      
+      document.getElementById('sidebar-avatar').innerText = (state.user?.name || 'Alex Mercer')
+        .split(' ').map(n=>n[0]).join('');
+
+      document.getElementById('label-level').innerText = `Lvl ${state.profile.level}`;
+      document.getElementById('label-xp').innerText = `${state.profile.xp} / ${state.profile.level * 1000} XP`;
+      
+      const percent = (state.profile.xp / (state.profile.level * 1000)) * 100;
+      document.getElementById('bar-xp').style.width = `${percent}%`;
+    }
+
+    function renderNotifications() {
+      const list = document.getElementById('notif-list');
+      const badge = document.getElementById('notif-badge');
+      const unreadCount = state.notifications.filter(n => !n.read).length;
+
+      if (unreadCount > 0) {
+        badge.classList.remove('hidden');
+      } else {
+        badge.classList.add('hidden');
+      }
+
+      list.innerHTML = state.notifications.map(n => `
+        <div class="p-2.5 rounded-xl bg-white/5 border border-white/5 text-xs ${!n.read ? 'border-l-2 border-l-cyan-400' : ''}">
+          <div class="font-bold text-white flex items-center justify-between">
+            <span>${n.title}</span>
+            ${!n.read ? '<span class="h-1.5 w-1.5 rounded-full bg-cyan-400"></span>' : ''}
+          </div>
+          <p class="text-gray-400 mt-1 leading-relaxed">${n.message}</p>
+        </div>
+      `).join('');
+    }
+
+    function toggleNotifDropdown() {
+      const drop = document.getElementById('notif-dropdown');
+      drop.classList.toggle('hidden');
+    }
+
+    // ==========================================
+    // SCREEN RENDERERS IMPLEMENTATIONS
+    // ==========================================
+
+    // 1. Dashboard
+    function renderDashboard() {
+      document.getElementById('dash-goal-span').innerText = state.profile.goal;
+      document.getElementById('dash-level').innerText = `Level ${state.profile.level}`;
+      document.getElementById('dash-xp-curr').innerText = `${state.profile.xp} XP`;
+      document.getElementById('dash-xp-total').innerText = `${state.profile.level * 1000} XP needed`;
+      
+      const percent = (state.profile.xp / (state.profile.level * 1000)) * 100;
+      document.getElementById('dash-xp-bar').style.width = `${percent}%`;
+
+      // Roadmap numbers
+      const completedSteps = state.roadmaps[0]?.steps.filter(s => s.status === 'completed').length || 0;
+      const totalSteps = state.roadmaps[0]?.steps.length || 6;
+      document.getElementById('dash-roadmap-steps').innerText = `${completedSteps} / ${totalSteps}`;
+
+      // CRM numbers
+      document.getElementById('dash-crm-count').innerText = `${state.applications.length} Active`;
+
+      // ATS score
+      const latestAts = localStorage.getItem('latest_ats_score');
+      document.getElementById('dash-ats-score').innerText = latestAts ? `${latestAts}%` : 'N/A';
+
+      // Checklist tasks
+      const checklist = document.getElementById('checklist-tasks');
+      checklist.innerHTML = state.tasks.map(t => `
+        <div onclick="toggleTask(${t.id})" class="flex items-center justify-between p-4 bg-white/5 border border-white/5 rounded-xl cursor-pointer hover:border-purple-500/30 transition duration-200">
+          <div class="flex items-center gap-3">
+            <div class="h-5 w-5 rounded border flex items-center justify-center transition-all ${t.completed ? 'bg-cyan-500 border-cyan-500 text-black' : 'border-white/20'}">
+              ${t.completed ? '<i data-lucide="check" class="h-3.5 w-3.5"></i>' : ''}
+            </div>
+            <span class="text-sm ${t.completed ? 'line-through text-gray-500' : 'text-white'}">${t.text}</span>
+          </div>
+          <span class="text-xs bg-purple-500/10 text-purple-400 font-bold px-2 py-1 rounded">+${t.xp} XP</span>
+        </div>
+      `).join('');
+
+      // Render achievements
+      const achGrid = document.getElementById('dashboard-achievements');
+      achGrid.innerHTML = state.achievements.map(ach => `
+        <div title="${ach.title}: ${ach.description}" class="flex flex-col items-center p-2 rounded-xl border border-white/5 text-center ${ach.locked ? 'opacity-30 bg-black/40' : 'bg-purple-500/5 border-purple-500/20'}">
+          <i data-lucide="${ach.badgeIcon}" class="h-6 w-6 ${ach.locked ? 'text-gray-600' : 'text-purple-400'}"></i>
+          <span class="text-[9px] text-gray-400 mt-1 truncate w-full">${ach.title}</span>
+        </div>
+      `).join('');
+
+      // Advisor message
+      const adv = document.getElementById('dash-advisor-tip');
+      if (state.profile.goal.toLowerCase().includes('full')) {
+        adv.innerHTML = `"Based on your track target of <span class='text-white font-bold'>Full Stack Developer</span>, you lack system configurations (Nginx/CDN). Review Month 6 guidelines to clear this gap."`;
+      } else {
+        adv.innerHTML = `"Based on your track target of <span class='text-white font-bold'>AI Engineer</span>, you lack containerization knowledge. Practice writing Dockerfiles to pass initial ATS resume screenings."`;
+      }
+      lucide.createIcons();
+    }
+
+    function toggleTask(id) {
+      const task = state.tasks.find(t => t.id === id);
+      if (task) {
+        task.completed = !task.completed;
+        if (task.completed) {
+          awardXP(task.xp, task.text);
+          if (id === 1) unlockAchievement('Compass Finder');
+        }
+        saveState();
+        renderDashboard();
+      }
+    }
+
+    function unlockAchievement(title) {
+      const ach = state.achievements.find(a => a.title === title);
+      if (ach && ach.locked) {
+        ach.locked = false;
+        addNotification('🏆 Achievement Unlocked!', `Unlocked Badge: ${title}`, 'achievement');
+        saveState();
+        renderPlatform();
+      }
+    }
+
+    // 2. Career Roadmap
+    function generateRoadmapData() {
+      let steps = [];
+      const goalLower = state.profile.goal.toLowerCase();
+      if (goalLower.includes('ai') || goalLower.includes('machine')) {
+        steps = [
+          { month: 'Month 1: Fundamentals', title: 'Python & Math Foundations', description: 'Master vector math, numpy, pandas, and calculus.', skills: ['Python', 'Linear Algebra', 'EDA'], resources: [{ title: 'Python Data Basics', type: 'course', url: 'https://kaggle.com' }], status: 'pending' },
+          { month: 'Month 2: Core ML', title: 'Supervised Learning & Scikit', description: 'Train decision trees, linear regression, and classifiers.', skills: ['Scikit-Learn', 'Feature Engineering'], resources: [{ title: 'Scikit User Guide', type: 'documentation', url: 'https://scikit-learn.org' }], status: 'pending' },
+          { month: 'Month 3: Deep Learning', title: 'Neural Networks & PyTorch', description: 'Build backpropagation algorithms and CNN models.', skills: ['PyTorch', 'CNNs'], resources: [{ title: 'PyTorch Tutorials', type: 'course', url: 'https://pytorch.org' }], status: 'pending' },
+          { month: 'Month 4: LLMs', title: 'Transformers & NLP', description: 'Learn attention modules, BERT, and generative systems.', skills: ['Transformers', 'HuggingFace'], resources: [{ title: 'HuggingFace NLP', type: 'course', url: 'https://huggingface.co' }], status: 'pending' },
+          { month: 'Month 5: RAG', title: 'Vector DBs & Orchestration', description: 'Store vector embeddings in Pinecone and orchestrate with LangChain.', skills: ['LangChain', 'Pinecone', 'ChromaDB'], resources: [{ title: 'LangChain Tutorial', type: 'video', url: 'https://youtube.com' }], status: 'pending' },
+          { month: 'Month 6: MLOps', title: 'Containerization & Cloud APIs', description: 'Package models into FastAPI endpoints and deploy with Docker.', skills: ['Docker', 'FastAPI', 'MLOps'], resources: [{ title: 'Docker Crash Course', type: 'video', url: 'https://youtube.com' }], status: 'pending' }
+        ];
+      } else {
+        steps = [
+          { month: 'Month 1: Frontend', title: 'React & Tailwind Mastery', description: 'Build componentized responsive layouts with custom style systems.', skills: ['React', 'Tailwind CSS', 'TypeScript'], resources: [{ title: 'React Dev Docs', type: 'documentation', url: 'https://react.dev' }], status: 'pending' },
+          { month: 'Month 2: Backend REST', title: 'Express & Node Server Architecture', description: 'Write secure, structured API controllers with middleware.', skills: ['Node.js', 'Express.js', 'JWT Auth'], resources: [{ title: 'REST Guide', type: 'documentation', url: 'https://restfulapi.net' }], status: 'pending' },
+          { month: 'Month 3: DB Integration', title: 'SQL & ORM Engines', description: 'Model relational schemas, index files, and manage migrations.', skills: ['PostgreSQL', 'Prisma ORM'], resources: [{ title: 'Prisma Intro', type: 'course', url: 'https://prisma.io' }], status: 'pending' },
+          { month: 'Month 4: Real-time', title: 'WebSockets & Socket.io', description: 'Establish dynamic bidirection channels for live collaborations.', skills: ['WebSockets', 'Redis'], resources: [{ title: 'Socket.io Docs', type: 'documentation', url: 'https://socket.io' }], status: 'pending' },
+          { month: 'Month 5: DevOps Deploy', title: 'Docker Containers & CI/CD', description: 'Script GitHub Actions workflow builds and launch onto host boxes.', skills: ['Docker', 'GitHub Actions'], resources: [{ title: 'Docker Video', type: 'video', url: 'https://youtube.com' }], status: 'pending' },
+          { month: 'Month 6: System Scale', title: 'Caching & Nginx CDN', description: 'Load balance traffic, optimize N+1 queries, configure Nginx paths.', skills: ['Nginx', 'System Design'], resources: [{ title: 'System Primer', type: 'documentation', url: 'https://github.com' }], status: 'pending' }
+        ];
+      }
+
+      state.roadmaps = [{
+        goal: state.profile.goal,
+        title: `GPS Guide: ${state.profile.goal} Career Roadmap`,
+        steps
+      }];
+      saveState();
+    }
+
+    function renderRoadmap() {
+      document.getElementById('roadmap-goal-span').innerText = state.profile.goal;
+      const tree = document.getElementById('roadmap-tree');
+      
+      if (state.roadmaps.length === 0) {
+        generateRoadmapData();
+      }
+
+      tree.innerHTML = state.roadmaps[0].steps.map((step, idx) => {
+        const isDone = step.status === 'completed';
+        const skillsPills = step.skills.map(s => `
+          <span class="text-xs bg-white/5 text-gray-300 px-3 py-1 rounded-full border border-white/5">${s}</span>
+        `).join('');
+
+        const resourceLines = step.resources.map(r => `
+          <a href="${r.url}" target="_blank" class="flex items-center justify-between text-xs text-gray-300 hover:text-white group">
+            <span class="truncate group-hover:underline">🧭 ${r.title}</span>
+            <span class="text-[10px] text-gray-500 bg-white/5 px-2 py-0.5 rounded uppercase">${r.type}</span>
+          </a>
+        `).join('');
+
+        return `
+          <div class="roadmap-line flex flex-col md:flex-row gap-6 relative">
+            <!-- circle dot node -->
+            <div onclick="toggleRoadmapStep(${idx})" class="cursor-pointer absolute top-0 left-[-31px] h-6 w-6 rounded-full border-2 flex items-center justify-center z-10 transition-colors ${isDone ? 'bg-cyan-400 border-cyan-400 text-black' : 'bg-darkBg border-white/20 text-gray-500'}">
+              ${isDone ? '<i data-lucide="check" class="h-3 w-3"></i>' : ''}
+            </div>
+
+            <!-- card box -->
+            <div class="flex-1 rounded-2xl p-6 glass-panel space-y-4 border ${isDone ? 'border-cyan-400/20 bg-cyan-500/5' : 'border-white/5'}">
+              <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <div>
+                  <span class="text-xs text-cyan-400 font-bold uppercase tracking-wider">${step.month}</span>
+                  <h3 class="text-lg font-bold text-white mt-1">${step.title}</h3>
+                </div>
+                <button onclick="toggleRoadmapStep(${idx})" class="px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 ${isDone ? 'bg-cyan-500/10 text-cyan-400 border border-cyan-500/30' : 'bg-purple-500 text-white hover:opacity-90'}">
+                  ${isDone ? 'Completed' : 'Mark Complete'}
+                </button>
+              </div>
+
+              <p class="text-sm text-gray-400 leading-relaxed">${step.description}</p>
+              <div class="flex flex-wrap gap-2">${skillsPills}</div>
+
+              <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 pt-2">
+                <div class="rounded-xl bg-white/5 p-4 border border-white/5 space-y-2.5">
+                  <div class="text-xs font-bold text-purple-400 flex items-center gap-1.5 uppercase">
+                    <i data-lucide="book-open" class="h-3.5 w-3.5"></i> Study Materials
+                  </div>
+                  <div class="space-y-1.5">${resourceLines}</div>
+                </div>
+
+                <div class="rounded-xl bg-white/5 p-4 border border-white/5 space-y-2.5">
+                  <div class="text-xs font-bold text-pink-400 flex items-center gap-1.5 uppercase">
+                    <i data-lucide="layers" class="h-3.5 w-3.5"></i> Portfolio build
+                  </div>
+                  <div>
+                    <div class="font-bold text-xs text-white flex justify-between">
+                      <span>Mini Capstone App</span>
+                      <span class="text-[9px] text-pink-400 uppercase">intermediate</span>
+                    </div>
+                    <p class="text-[11px] text-gray-400 mt-0.5 leading-relaxed">Build and publish a functional project demonstrating these specific variables.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+      lucide.createIcons();
+    }
+
+    function toggleRoadmapStep(idx) {
+      const r = state.roadmaps[0];
+      if (r && r.steps[idx]) {
+        const step = r.steps[idx];
+        step.status = step.status === 'completed' ? 'pending' : 'completed';
+        
+        if (step.status === 'completed') {
+          awardXP(150, `Completed milestone: ${step.title}`);
+          // Add new skills to profile
+          step.skills.forEach(sk => {
+            if (!state.profile.skills.includes(sk)) {
+              state.profile.skills.push(sk);
+            }
+          });
+        }
+        
+        // Checklist update
+        const task = state.tasks.find(t => t.id === 1);
+        if (task && !task.completed) {
+          task.completed = true;
+          awardXP(100, task.text);
+        }
+
+        saveState();
+        renderRoadmap();
+      }
+    }
+
+    function regenerateRoadmap() {
+      generateRoadmapData();
+      addNotification('AI Roadmap Regenerated', `GPS computed a new 6-month path for ${state.profile.goal}`, 'success');
+      renderRoadmap();
+    }
+
+    // 3. Skills Gap Screen
+    function renderSkills() {
+      const grid = document.getElementById('skills-list-grid');
+      const gaps = document.getElementById('skills-gap-badges');
+
+      grid.innerHTML = state.profile.skills.map((skill, sIdx) => {
+        const level = sIdx % 2 === 0 ? 'Advanced' : 'Intermediate';
+        const pct = sIdx % 2 === 0 ? 85 : 60;
+        return `
+          <div class="p-4 bg-white/5 border border-white/5 rounded-xl space-y-2">
+            <div class="flex justify-between items-center">
+              <span class="font-bold text-sm text-white">${skill}</span>
+              <span class="text-xs text-cyan-400 font-bold">${level}</span>
+            </div>
+            <div class="w-full bg-white/5 h-2 rounded-full overflow-hidden">
+              <div class="h-full bg-gradient-primary rounded-full" style="width: ${pct}%"></div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      // Gap analysis tags list
+      const missing = state.profile.goal.toLowerCase().includes('full') 
+        ? ['TypeScript', 'Docker', 'Prisma ORM', 'Nginx']
+        : ['PyTorch', 'Transformers', 'LangChain', 'Docker'];
+
+      gaps.innerHTML = missing.map(item => `
+        <span class="text-xs font-semibold bg-red-500/10 text-red-400 border border-red-500/20 px-3 py-1 rounded-full">
+          Missing: ${item}
+        </span>
+      `).join('');
+
+      const para = document.getElementById('skills-advisor-paragraph');
+      if (state.profile.goal.toLowerCase().includes('full')) {
+        para.innerText = "Modern Full Stack roles require scalable caching (Redis) and reverse proxy routers (Nginx). Include a small deployment configuration inside your final project.";
+      } else {
+        para.innerText = "PyTorch forms the backbone of AI engineering. Focus on writing custom neural layers and data loading pipelines to pass ATS resume reviews.";
+      }
+    }
+
+    // 4. Resume Analyzer
+    function handleAnalyzeResume(e) {
+      e.preventDefault();
+      const txt = document.getElementById('resume-textarea').value;
+      if (!txt.trim()) return;
+
+      const txtLower = txt.toLowerCase();
+      const goalLower = state.profile.goal.toLowerCase();
+
+      let matched = 0;
+      let target = goalLower.includes('full') 
+        ? ['react', 'node.js', 'typescript', 'postgres', 'docker', 'nginx']
+        : ['python', 'pytorch', 'transformers', 'docker', 'langchain', 'mlops'];
+
+      target.forEach(kw => {
+        if (txtLower.includes(kw)) matched++;
+      });
+
+      const score = Math.min(94, 52 + (matched * 7));
+      const missing = target.filter(kw => !txtLower.includes(kw));
+
+      localStorage.setItem('latest_ats_score', score);
+      
+      // Update UI
+      document.getElementById('resume-empty-state').classList.add('hidden');
+      document.getElementById('resume-result-state').classList.remove('hidden');
+
+      document.getElementById('resume-score-percent').innerText = `${score}%`;
+      document.getElementById('resume-target-label').innerText = `Compared to: ${state.profile.goal}`;
+
+      const keywordsDiv = document.getElementById('resume-missing-keywords');
+      keywordsDiv.innerHTML = (missing.length > 0 ? missing : ['Docker', 'AWS Deployment']).map(kw => `
+        <span class="text-xs bg-red-500/10 text-red-400 border border-red-500/20 px-3 py-1 rounded-full font-semibold uppercase">
+          ${kw}
+        </span>
+      `).join('');
+
+      const feedback = document.getElementById('resume-feedback-list');
+      feedback.innerHTML = `
+        <li class="leading-relaxed">Tailor your summary paragraph specifically to highlight: ${state.profile.goal}.</li>
+        <li class="leading-relaxed">Quantify impact metrics on your experience bullets (e.g. "sped up execution pipeline by 15%").</li>
+        <li class="leading-relaxed">Arrange your technical skill labels under clean subheaders for easy crawler parsing.</li>
+      `;
+
+      // Trigger achievement
+      unlockAchievement('Resume Explorer');
+      const task = state.tasks.find(t => t.id === 2);
+      if (task && !task.completed) {
+        task.completed = true;
+        awardXP(150, task.text);
+      }
+      saveState();
+    }
+
+    // 5. Jobs Board
+    const preseededJobs = [
+      { id: 'j1', title: 'Machine Learning Engineer', company: 'NeuralTech Inc', location: 'San Francisco, CA', description: 'Design and deploy core deep learning pipelines and neural network models.', salary: '$130,000 - $160,000', skills: ['Python', 'PyTorch', 'Docker'] },
+      { id: 'j2', title: 'Full Stack Developer', company: 'SaaSFlow Corp', location: 'Remote', description: 'Build premium landing pages and clean backends with optimized REST API design.', salary: '$115,000 - $140,000', skills: ['React', 'Node.js', 'TypeScript'] },
+      { id: 'j3', title: 'AI Developer Specialist', company: 'Cognitive Web Group', location: 'Boston, MA', description: 'Bridge LLM pipelines with beautiful UI experiences. Design system focus.', salary: '$100,000 - $125,000', skills: ['Python', 'LangChain', 'Tailwind'] }
+    ];
+
+    function renderJobs() {
+      document.getElementById('jobs-goal-span').innerText = state.profile.goal;
+      const grid = document.getElementById('jobs-grid');
+      
+      grid.innerHTML = preseededJobs.map(job => `
+        <div class="rounded-2xl p-6 glass-panel space-y-4 border border-white/5 flex flex-col justify-between">
+          <div class="space-y-2">
+            <span class="text-[10px] bg-cyan-500/10 text-cyan-400 font-bold px-2 py-0.5 rounded border border-cyan-500/20 uppercase tracking-wider">${job.salary}</span>
+            <h3 class="font-bold text-lg text-white">${job.title}</h3>
+            <p class="text-xs text-gray-400 font-bold">${job.company} — ${job.location}</p>
+            <p class="text-xs text-gray-400 leading-relaxed pt-2">${job.description}</p>
+          </div>
+
+          <div class="space-y-4">
+            <div class="flex flex-wrap gap-1">
+              ${job.skills.map(s => `<span class="text-[10px] bg-white/5 text-gray-300 px-2 py-0.5 rounded border border-white/5">${s}</span>`).join('')}
+            </div>
+            <button onclick="importJobToCRM('${job.title}', '${job.company}')" class="w-full py-2.5 bg-gradient-primary text-white font-bold rounded-xl text-xs flex items-center justify-center gap-1.5">
+              <i data-lucide="plus" class="h-4 w-4"></i> Track in CRM Board
+            </button>
+          </div>
+        </div>
+      `).join('');
+      lucide.createIcons();
+    }
+
+    function importJobToCRM(title, company) {
+      state.applications.push({
+        id: 'a_' + Math.random().toString(36).substr(2, 5),
+        title,
+        company,
+        status: 'applied',
+        notes: 'Pre-seeded opening import.'
+      });
+      addNotification('Job Tracked', `Added "${title}" at ${company} to Applied column.`, 'success');
+      saveState();
+    }
+
+    // 6. Kanban CRM
+    function openCRMModal() {
+      document.getElementById('crm-modal').classList.remove('hidden');
+    }
+    function closeCRMModal() {
+      document.getElementById('crm-modal').classList.add('hidden');
+    }
+
+    function handleCRMSubmit(e) {
+      e.preventDefault();
+      const title = document.getElementById('crm-input-title').value;
+      const company = document.getElementById('crm-input-company').value;
+      const notes = document.getElementById('crm-input-notes').value;
+
+      state.applications.push({
+        id: 'a_' + Math.random().toString(36).substr(2, 5),
+        title,
+        company,
+        status: 'applied',
+        notes
+      });
+
+      document.getElementById('crm-input-title').value = '';
+      document.getElementById('crm-input-company').value = '';
+      document.getElementById('crm-input-notes').value = '';
+      
+      closeCRMModal();
+      addNotification('Job Added', `Successfully created card for ${title}`, 'success');
+      saveState();
+      renderCRM();
+    }
+
+    function renderCRM() {
+      const cols = ['applied', 'interview', 'selected', 'rejected'];
+      
+      cols.forEach(status => {
+        const apps = state.applications.filter(a => a.status === status);
+        document.getElementById(`col-${status}-count`).innerText = apps.length;
+
+        const colEl = document.getElementById(`col-${status}`);
+        colEl.innerHTML = apps.map(app => `
+          <div class="p-4 bg-white/5 border border-white/5 rounded-xl space-y-3 relative">
+            <div>
+              <div class="font-bold text-sm text-white truncate">${app.title}</div>
+              <div class="text-[10px] text-gray-500 font-bold truncate mt-0.5">${app.company}</div>
+            </div>
+
+            <div class="flex justify-between items-center pt-2">
+              <div class="flex gap-1">
+                ${status !== 'applied' ? `<button onclick="moveCRM('${app.id}', 'applied')" class="p-1 rounded bg-white/5 hover:bg-white/10 text-xs" title="Move to Applied">🧭</button>` : ''}
+                ${status !== 'interview' ? `<button onclick="moveCRM('${app.id}', 'interview')" class="p-1 rounded bg-white/5 hover:bg-white/10 text-xs" title="Move to Interview">💬</button>` : ''}
+                ${status !== 'selected' ? `<button onclick="moveCRM('${app.id}', 'selected')" class="p-1 rounded bg-white/5 hover:bg-white/10 text-xs" title="Move to Selected">🏆</button>` : ''}
+                ${status !== 'rejected' ? `<button onclick="moveCRM('${app.id}', 'rejected')" class="p-1 rounded bg-white/5 hover:bg-white/10 text-xs" title="Move to Rejected">❌</button>` : ''}
+              </div>
+              <button onclick="deleteCRM('${app.id}')" class="text-gray-600 hover:text-red-400 transition">
+                <i data-lucide="trash-2" class="h-3.5 w-3.5"></i>
+              </button>
+            </div>
+          </div>
+        `).join('');
+      });
+      lucide.createIcons();
+    }
+
+    function moveCRM(id, nextStatus) {
+      const app = state.applications.find(a => a.id === id);
+      if (app) {
+        app.status = nextStatus;
+        if (nextStatus === 'interview') {
+          const task = state.tasks.find(t => t.id === 4);
+          if (task && !task.completed) {
+            task.completed = true;
+            awardXP(100, task.text);
+          }
+        }
+        if (nextStatus === 'selected') {
+          unlockAchievement('Offer Getter');
+          awardXP(500, 'Landed job offer!');
+        }
+        saveState();
+        renderCRM();
+      }
+    }
+
+    function deleteCRM(id) {
+      state.applications = state.applications.filter(a => a.id !== id);
+      addNotification('Card Deleted', 'Job application removed from pipeline', 'warning');
+      saveState();
+      renderCRM();
+    }
+
+    // 7. Interview Coach
+    const interviewQuestions = {
+      ai: [
+        { q: 'Explain the difference between L1 and L2 regularization. When would you prefer one over the other?', type: 'technical' },
+        { q: 'Describe how the self-attention mechanism works in the Transformer architecture.', type: 'technical' },
+        { q: 'Write a function in Python to compute the cosine similarity between two numpy arrays.', type: 'coding' },
+        { q: 'How do you explain the predictions of a complex machine learning model to business partners?', type: 'hr' },
+        { q: 'What are some strategies to handle overfitting in neural networks, and how do they work?', type: 'technical' }
+      ],
+      web: [
+        { q: 'Explain what the Virtual DOM is and how React updates the UI.', type: 'technical' },
+        { q: 'What is the N+1 query problem, and how do you solve it in SQL/ORM?', type: 'technical' },
+        { q: 'Write a function in JavaScript to debounce a search input API handler.', type: 'coding' },
+        { q: 'Explain the differences between Cookies, SessionStorage, and LocalStorage for authentication tokens.', type: 'technical' },
+        { q: 'Describe a time when you had to debug a difficult performance issue in production.', type: 'hr' }
+      ]
+    };
+
+    function startInterview() {
+      const role = document.getElementById('interview-role-select').value;
+      const questions = (role.toLowerCase().includes('ai') || role.toLowerCase().includes('machine'))
+        ? interviewQuestions.ai
+        : interviewQuestions.web;
+
+      state.currentInterview = {
+        role,
+        questions: questions.map(q => ({ question: q.q, type: q.type, answer: '', rating: 0, feedback: '' }))
+      };
+      state.currentQuestionIdx = 0;
+      saveState();
+
+      // Show/Hide divs
+      document.getElementById('interview-start-state').classList.add('hidden');
+      document.getElementById('interview-active-state').classList.remove('hidden');
+      document.getElementById('interview-question-zone').classList.remove('hidden');
+      document.getElementById('interview-done-zone').classList.add('hidden');
+
+      loadQuestion();
+    }
+
+    function loadQuestion() {
+      const idx = state.currentQuestionIdx;
+      const q = state.currentInterview.questions[idx];
+
+      document.getElementById('interview-title-label').innerText = `MOCK INTERVIEW SESSION: ${state.currentInterview.role}`;
+      document.getElementById('interview-progress-label').innerText = `Question ${idx + 1} of 5`;
+      document.getElementById('interview-qtype-badge').innerText = q.type;
+      document.getElementById('interview-qtext').innerText = q.question;
+      document.getElementById('interview-answer-input').value = '';
+
+      renderInterviewLogs();
+    }
+
+    function submitAnswer() {
+      const ans = document.getElementById('interview-answer-input').value;
+      if (!ans.trim()) return;
+
+      const idx = state.currentQuestionIdx;
+      const q = state.currentInterview.questions[idx];
+
+      q.answer = ans;
+
+      // Mock AI Evaluation
+      const len = ans.length;
+      let rating = 2;
+      let feedback = 'Your answer is brief. Include more technical keywords, frameworks, or code contexts to justify your point.';
+      
+      if (len > 150) {
+        rating = 5;
+        feedback = 'Exceptional answer! You demonstrated complete conceptual accuracy, discussed mechanics, and showed clear mastery.';
+      } else if (len > 70) {
+        rating = 4;
+        feedback = 'Good answer. You hit the key conceptual terms. For a better rating, elaborate on a real-world scenario where you applied it.';
+      } else if (len > 30) {
+        rating = 3;
+        feedback = 'Correct direction but lacks depth. Mention concrete APIs or architectural parameters to demonstrate experience.';
+      }
+
+      q.rating = rating;
+      q.feedback = feedback;
+
+      state.currentQuestionIdx++;
+      saveState();
+
+      if (state.currentQuestionIdx >= 5) {
+        // Complete interview
+        document.getElementById('interview-question-zone').classList.add('hidden');
+        document.getElementById('interview-done-zone').classList.remove('hidden');
+
+        const scoreSum = state.currentInterview.questions.reduce((acc, curr) => acc + curr.rating, 0);
+        const overall = Math.round((scoreSum / 25) * 100);
+
+        document.getElementById('interview-final-score').innerText = `${overall}%`;
+        unlockAchievement('Speech Master');
+        awardXP(300, 'Mock interview completion');
+
+        // Checklist update
+        const task = state.tasks.find(t => t.id === 3);
+        if (task && !task.completed) {
+          task.completed = true;
+          awardXP(200, task.text);
+        }
+      } else {
+        loadQuestion();
+      }
+      renderInterviewLogs();
+    }
+
+    function renderInterviewLogs() {
+      const container = document.getElementById('interview-logs-container');
+      container.innerHTML = state.currentInterview.questions.map((q, idx) => `
+        <div class="p-4 rounded-xl border border-white/5 text-xs space-y-2 bg-white/5 ${q.answer ? 'opacity-100' : 'opacity-30'}">
+          <div class="flex justify-between items-center font-bold">
+            <span class="text-white">Q${idx + 1} (${q.type})</span>
+            ${q.rating > 0 ? `<span class="text-yellow-400">${'★'.repeat(q.rating)}</span>` : ''}
+          </div>
+          <p class="text-gray-400 leading-relaxed truncate">${q.question}</p>
+          ${q.feedback ? `<p class="p-2.5 rounded bg-black/40 text-cyan-300 mt-2 font-mono leading-relaxed">${q.feedback}</p>` : ''}
+        </div>
+      `).join('');
+    }
+
+    function resetInterview() {
+      state.currentInterview = null;
+      saveState();
+      document.getElementById('interview-start-state').classList.remove('hidden');
+      document.getElementById('interview-active-state').classList.add('hidden');
+    }
+
+    // 8. AI Chatbot
+    const chatbotReplies = {
+      learn: "To advance your career, I recommend first finalizing your target goal on the Profile page. Once set, generate a Roadmap. It will map out exactly which technologies to master month-by-month. Start with foundational languages (like Python or JavaScript), then build projects to secure those skills, and track your growth on your dashboard.",
+      resume: "Resumes are crucial for passing initial screening loops. Go to the Resume Analyzer, upload your CV, and let the AI compute an ATS Score. I will give you detailed suggestions on formatting, missing keywords, and sections you need to expand to get noticed by automated tracking systems.",
+      interview: "Mock interviews are the best way to gain confidence. Head to the AI Interview Coach page, enter your target role, and the coach will generate HR, coding, and technical questions. Answer them in detail, and I'll immediately analyze and grade your response with concrete tips.",
+      project: "For a strong portfolio, build 3 functional systems. Example: if your goal is AI Engineer, build a PDF RAG Chatbot, a PyTorch Neural Net from scratch, or an automated EDA Dashboard. If it is Full Stack, build a Real-time WebSocket Whiteboard, an e-commerce backend API, or a Kanban Board."
+    };
+
+    function sendChatMessage() {
+      const inp = document.getElementById('chat-message-input');
+      const val = inp.value;
+      if (!val.trim()) return;
+
+      inp.value = '';
+      
+      const container = document.getElementById('chat-messages-container');
+      
+      // User bubble
+      container.innerHTML += `
+        <div class="flex justify-end">
+          <div class="max-w-xl p-4 rounded-2xl text-sm leading-relaxed bg-gradient-primary text-white rounded-tr-none shadow-md shadow-purple-500/10">
+            ${val}
+          </div>
+        </div>
+      `;
+
+      // AI bubble with small delay simulation
+      setTimeout(() => {
+        let reply = "I'm your 24/7 AI Career Coach. You can ask me anything about building projects, learning plans, resume formatting, or technical topics. Try asking me: 'What should I learn to become an AI Engineer?' or 'How do I optimize my resume?'";
+        const msg = val.toLowerCase();
+
+        if (msg.includes('learn') || msg.includes('roadmap') || msg.includes('career')) {
+          reply = chatbotReplies.learn;
+        } else if (msg.includes('resume') || msg.includes('cv') || msg.includes('ats')) {
+          reply = chatbotReplies.resume;
+        } else if (msg.includes('interview') || msg.includes('mock')) {
+          reply = chatbotReplies.interview;
+        } else if (msg.includes('project') || msg.includes('portfolio')) {
+          reply = chatbotReplies.project;
+        }
+
+        container.innerHTML += `
+          <div class="flex justify-start">
+            <div class="max-w-xl p-4 rounded-2xl text-sm leading-relaxed bg-white/5 text-gray-300 rounded-tl-none border border-white/5">
+              ${reply}
+            </div>
+          </div>
+        `;
+        container.scrollTop = container.scrollHeight;
+      }, 1000);
+    }
+
+    function sendQuickChat(text) {
+      document.getElementById('chat-message-input').value = text;
+      sendChatMessage();
+    }
+
+    // 9. Profile Save
+    function handleProfileSave(e) {
+      e.preventDefault();
+      state.profile.goal = document.getElementById('profile-input-goal').value;
+      state.profile.location = document.getElementById('profile-input-location').value;
+      state.profile.skills = document.getElementById('profile-input-skills').value.split(',').map(s=>s.trim());
+      state.profile.school = document.getElementById('profile-input-school').value;
+      state.profile.company = document.getElementById('profile-input-experience').value;
+
+      // check architect achievement
+      if (state.profile.school && state.profile.company && state.profile.goal) {
+        unlockAchievement('Profile Architect');
+      }
+
+      addNotification('Profile Saved', 'Configurations updated successfully.', 'success');
+      saveState();
+      renderPlatform();
+    }
+
+    // 10. Settings Toggle
+    function toggleTheme() {
+      state.darkMode = !state.darkMode;
+      const icon = document.getElementById('theme-icon');
+      if (state.darkMode) {
+        icon.setAttribute('data-lucide', 'moon');
+        document.body.style.background = "radial-gradient(circle at 50% 0%, #17102b 0%, #0b0c10 70%)";
+      } else {
+        icon.setAttribute('data-lucide', 'sun');
+        document.body.style.background = "radial-gradient(circle at 50% 0%, #f3f4f6 0%, #ffffff 70%)";
+      }
+      lucide.createIcons();
+      saveState();
+    }
+
+    // Bootloader
+    window.onload = function() {
+      loadSaveState();
+      
+      if (state.user) {
+        switchView('platform');
+      } else {
+        switchView('landing');
+      }
+    };
+  </script>
+</body>
+</html>

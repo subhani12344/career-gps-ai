@@ -1,0 +1,212 @@
+========================================================================
+                      CAREER GPS AI — SYSTEM DOCUMENTATION
+========================================================================
+
+Author: Antigravity AI Coding Assistant (Pair Programmed with USER)
+Date: 2026-06-13
+Location: C:\Users\subha\.gemini\antigravity\scratch\career-gps-ai
+Version: 1.0.0
+License: Production Ready / Portfolio Worthy / Startup Capable
+
+------------------------------------------------------------------------
+1. INTRODUCTION & PRODUCT GOAL
+------------------------------------------------------------------------
+Career GPS AI is a premium full-stack platform designed to guide developers
+through their tech career journeys. The system eliminates uncertainty in 
+learning paths by analyzing a user's target goal (e.g. AI Engineer, 
+Full-Stack Developer), evaluating their current profile/skills, identifying
+critical knowledge gaps, and constructing a customized month-by-month learning
+and project roadmap.
+
+Additionally, the platform optimizes the job-hunting funnel by:
+- Analyzing resume ATS compatibility and extracting missing keywords.
+- Recommending matching job listings.
+- Tracking job applications via a visual Kanban CRM.
+- Grading simulated mock interviews with star ratings and constructive feedback.
+- Supporting real-time guidance via a 24/7 AI career chatbot.
+- Incentivizing progress through XP points, levels, and badge achievements.
+
+------------------------------------------------------------------------
+2. FOLDER STRUCTURE & DELIVERABLES
+------------------------------------------------------------------------
+The project is organized in a clean monorepo skeleton:
+
+career-gps-ai/
+│
+├── client/                 # Vite + React + Tailwind CSS SPA Client
+│   ├── src/App.jsx         # Master frontend dashboard container & UI logic
+│   ├── src/index.css       # Custom dark-theme variables & glassmorphism
+│   ├── src/main.jsx        # React bootloader mounting node
+│   ├── tailwind.config.js  # Styling variables and pulse animations
+│   ├── postcss.config.js   # Autoprefixer pipeline configurations
+│   ├── package.json        # Frontend dependency configurations
+│   └── vite.config.js      # Vite dev port and bundler settings
+│
+├── server/                 # Express.js Node API Backend
+│   ├── server.js           # Express instance, Middlewares mount, listener
+│   ├── config/db.js        # DB adapter with automated local JSON-db fallback
+│   ├── models/schemas.js   # Unified schema declarations for all collections
+│   ├── middleware/auth.js  # JWT extraction and role-based checks
+│   ├── middleware/error.js # Express global exception formatter
+│   ├── routes/api.js       # Core API Router (endpoints for all 20 steps)
+│   ├── services/aiService.js# Gemini API fetch adaptor and fallback simulator
+│   ├── .env                # Local configuration values
+│   ├── .env.example        # Local configuration template
+│   └── package.json        # Backend dependency configurations
+│
+├── database/               # Database utilities
+│   ├── seed.js             # Seeding scripts for default jobs and courses
+│   └── local_db.json       # JSON file database (active when MongoDB is offline)
+│
+├── docs/                   # Architectural blueprints
+│   └── architecture.md     # Flow topologies and network graphs
+│
+├── mobile/                 # Mobile placeholders
+│   └── README.md           # Expo React Native wrapper instructions
+│
+├── deployment/             # Deployment configurations
+│   └── docker-compose.yml  # Multi-container orchestration stack
+│
+└── index.html              # Standalone SPA prototype running directly in browsers
+
+------------------------------------------------------------------------
+3. SYSTEM ARCHITECTURE & DATA FLOW
+------------------------------------------------------------------------
+The system operates on a dual-mode topology:
+
+A. Full-Stack Connectivity:
+   When running the backend server, the client routes all HTTP calls (Auth,
+   CRM, AI) to `http://localhost:5000/api`. The server secures endpoints
+   using a JWT Bearer token middleware, and communicates with MongoDB.
+   If MongoDB is unavailable (not running locally), the backend automatically
+   switches to JSON Database Mode, loading and writing data directly to
+   `database/local_db.json`.
+
+B. Standalone Client-Side Mode:
+   If Node/npm is not installed on the system, double-clicking the root
+   `index.html` file runs the application directly in any web browser.
+   The client detects that the backend is offline and switches to 
+   LocalStorage Sandbox Mode. All states (user logs, Kanban movements, 
+   resume parsing calculations, interview submissions, chatbot outputs,
+   and XP levels) are processed directly in the browser and persisted
+   in `localStorage`.
+
+------------------------------------------------------------------------
+4. DATABASE COLLECTIONS SCHEMAS
+------------------------------------------------------------------------
+The system implements 14 collections registered via Mongoose:
+
+1. Users: Hashed email/pass credentials, name, role (user/admin).
+2. Profiles: Link to userId, education array, skills array, interests,
+   active goal, experience timeline, location, resume URL, XP, level.
+3. Skills: Link to userId, name, skill level, progress (0-100), dates.
+4. Roadmaps: Link to userId, goal target, steps array (months, titles,
+   descriptions, skills, resources, projects, completed status).
+5. Resources: Title, type (course/video/documentation/book), URL, mapped skills.
+6. Projects: Title, description, difficulty, tech stack, github link.
+7. Jobs: Title, company, location, description, required skills, salary.
+8. Applications: Link to userId, jobId, title, company, status (applied/
+   interview/selected/rejected), applied date, notes, salary.
+9. Resumes: Link to userId, file name, parsed preview, ATS score, keywords.
+10. Interviews: Link to userId, jobTitle, questions list (question, type,
+    userAnswer, rating 1-5, feedback), overall score, completed status.
+11. Achievements: Link to userId, title, description, badge icon, date.
+12. Notifications: Link to userId, title, message, type (info/success/warning),
+    read status, timestamp.
+13. Settings: Link to userId, theme preference, email/push toggles.
+14. AdminLogs: Link to adminId, action taken, target document.
+
+------------------------------------------------------------------------
+5. CORE API ROUTES & ENDPOINTS
+------------------------------------------------------------------------
+Base URL: `/api`
+
+AUTH:
+- `POST /auth/register` : Creates credentials, defaults profile and settings.
+- `POST /auth/login`    : Matches credentials, returns signed JWT.
+- `GET /auth/me`        : Fetches logged user, profile, and settings data.
+
+PROFILE:
+- `GET /profile`        : Fetches active user profile.
+- `PUT /profile`        : Updates CV inputs, goals, skills list, location.
+
+ROADMAP:
+- `GET /roadmap`        : Fetches generated roadmap paths.
+- `POST /roadmap/generate`: Invokes AI to create a 6-month roadmap step-list.
+- `PUT /roadmap/:id/step`: Toggles step status, adds XP (+150), pushes skills.
+
+SKILLS:
+- `GET /skills/gap`     : Computes user skills vs goal requirements.
+
+RESUME:
+- `POST /resume/analyze`: Multiparts upload zone, computes ATS matching.
+
+JOBS & CRM:
+- `GET /jobs/recommendations`: Lists pre-seeded jobs.
+- `GET /applications`   : Fetches job applications cards.
+- `POST /applications`  : Inserts a job card into Applied column.
+- `PUT /applications/:id`: Updates card status (Applied -> Interview -> selected).
+- `DELETE /applications/:id`: Deletes card.
+
+INTERVIEW COACH:
+- `POST /interview/start` : Loads 5 technical, coding, and HR questions.
+- `POST /interview/:id/submit-answer` : Evaluates answer lengths, outputs 1-5 rating.
+
+CHAT:
+- `POST /chat`          : Conversational coach overlay.
+
+ACHIEVEMENTS & NOTIFICATIONS:
+- `GET /achievements`   : Fetches badge categories.
+- `GET /notifications`  : Lists user alert cards.
+- `PUT /notifications/:id/read` : Marks notification as read.
+
+------------------------------------------------------------------------
+6. DESIGN SYSTEM & VISUAL STYLE GUIDE
+------------------------------------------------------------------------
+The UI follows premium dark-mode ergonomics:
+- **Base Background**: Deep slate/charcoal radial layout: `radial-gradient(circle at 50% 0%, #17102b 0%, #0b0c10 70%)`.
+- **Card Panels**: Frosted glass panels using `backdrop-filter: blur(12px)` and thin semi-transparent white borders: `rgba(255, 255, 255, 0.08)`.
+- **Primary Purple/Indigo Accent**: `#8b5cf6` (provides highlights, button states, and timeline dots).
+- **Secondary Cyan/Teal Accent**: `#06b6d4` (provides progress bar glows and success messages).
+- **Typography**: Outfit font family for major headers, Inter font family for high-legibility layout body text.
+- **Micro-Animations**: Custom CSS floating keyframes and scale modifications on button hover states.
+
+------------------------------------------------------------------------
+7. AI PROMPT ARCHITECTURE & GRADING ENGINE
+------------------------------------------------------------------------
+The AI engine (`server/services/aiService.js`) uses structured system prompts:
+1. Roadmap Generation:
+   "Generate a comprehensive 6-month career roadmap for a user who wants to
+    become a [Goal]. Return output EXACTLY in JSON format following this schema:
+    [ { month, title, description, skills: [], resources: [], projects: [] } ]"
+2. Resume Parsing:
+   "Analyze the provided resume against target role of [Goal]. Calculate
+    ATS score (0-100), weak sections, missing keywords. Return JSON:
+    { atsScore, feedback: [], missingSkills: [] }"
+3. Interview Grading:
+   Evaluates user answers on technical depth. Ratings:
+   - 5 Stars: Length > 150 chars, contains target keywords, references implementations.
+   - 4 Stars: Length > 70 chars, conceptually correct.
+   - 3 Stars: Length > 30 chars, brief.
+   - 2 Stars: Length < 30 chars, missing core details.
+
+------------------------------------------------------------------------
+8. SETUP & DEPLOYMENT MANUAL
+------------------------------------------------------------------------
+A. Prerequisites:
+   - Install **Node.js (LTS)** and **VS Code**.
+   - (Optional) Install **MongoDB Community Server** to run database server.
+
+B. Setup:
+   1. Navigate to `server/`, create a `.env` file, and populate connection variables.
+   2. Run `npm install` inside both `client/` and `server/` folders.
+   3. Run `npm run seed` in `server/` to preseed collection contents.
+
+C. Execution:
+   - Run `npm run dev` in `server/` and `npm run dev` in `client/` to start local dev servers.
+   - Alternatively, double-click `index.html` at the root folder to run the local browser sandbox immediately.
+
+D. Docker deployment:
+   - Navigate to `deployment/` and run `docker-compose up --build`.
+
+========================================================================
